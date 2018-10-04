@@ -1,10 +1,11 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center ;
     align-items: center;
-    height: 500px;
-    /* border: 1px solid black; */
+    height: 100%;
+    border: 1px solid black;
+    font-family: 'Aldrich';
 }
 
 .flag__outline {
@@ -35,4 +36,38 @@
 input[type="text"]
 {
     font-size:24px;
+    color: black;
+}
+
+h1 {
+    font-size: 3em;
+    /* border: 1px solid red; */
+    height: 50px;
+    width: 400px;
+    text-align: center;  
+}
+
+body, html {
+    height: 100%;
+}
+
+.background { 
+    /* The image used */
+    background-image: url("assets/background/10.png");
+
+    /* Full height */
+    height: 100%; 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.score {
+    width: 400px;
+    font-size: 50px;
+    margin-top: 100px;
+    text-align: center;
+    /* border: 1px solid green; */
 }

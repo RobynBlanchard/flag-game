@@ -3,20 +3,27 @@
     <head>
         <meta charset="UTF-8">
         <link type="text/css" rel="stylesheet" href="style.css">
+        <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
         <title>Flags of the world</title>
     </head>
     <body>
-        <div class="container">
-            <div class="flag__outline">
-                <img class="flag__image" src='assets/Afghanistan.png'>
+        <div class="background"> 
+            <div class="container">
+                <h1 class="heading">
+                    Guess the flag!
+                </h1>
+                <div class="flag__outline">
+                    <img class="flag__image" src='assets/Afghanistan.png'>
+                </div>
+                <div class="text__box">
+                    <input type="text" class="enter__guess" >
+                </div>
+                <div class="score">
+                    0
+                </div>
             </div>
-            <div class="text__box">
-                <input type="text" class="enter__guess" placeholder="Guess the flag">
-            </div>
-            <!-- <div>
-                <button class="button">Submit</button>
-            </div> -->
         </div>
+        
         
         <script src="app.js"></script>
     </body>
