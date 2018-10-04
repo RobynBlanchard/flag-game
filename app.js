@@ -15,6 +15,16 @@ flags = {
 
 var index, allCountries, allFlags, currentCountry, currentFlag;
 
+var setUpEventListeners = function() {
+    // document.querySelector('.button').addEventListener('click', game);
+
+    document.addEventListener("keypress", function() {
+        if (event.keyCode == 13 || event.which == 13) {
+            game();
+        }
+    });
+};
+
 init();
 
 function init() {
@@ -25,23 +35,31 @@ function init() {
     currentFlag = allFlags[index];
 
     document.querySelector('.flag__image').src = 'assets/' + currentFlag
+
+    setUpEventListeners();
 }
 
 
-document.querySelector('.button').addEventListener('click', function() {
+
+
+function game() {
     var correct = checkGuess();
     if (correct) {
         if (allCountries.length === 1) {
             console.log('winner');
         } else {
+            document.querySelector('.enter__guess').value = "";
+            document.querySelector('.enter__guess').focus();
+
             removeCountry();
             nextQuestion();
+
         }   
     }
-});
+};
 
 function checkGuess() {
-    var ans = document.querySelector('.enter__guess').value;
+    var ans = document.querySelector('.enter__guess').value.toLowerCase();
     return ans === currentCountry ?  true :  false;
 }
 
