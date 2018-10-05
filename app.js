@@ -15,7 +15,7 @@ flags = {
 
 var index, allCountries, allFlags, currentCountry, currentFlag;
 
-var CCOUNT = 60;
+var CCOUNT = 300; // 5 minutes
     
 var t, count;
 
@@ -49,12 +49,16 @@ function skip() {
 }
 
 function displayTimer() {
-    // displays time in span
-    document.getElementById('timespan').innerHTML = count;
+    var minutes = Math.floor(count / 60);
+    minutes = String("0" + minutes).slice(-2);
+    var seconds = count % 60;
+    seconds = String("0" + seconds).slice(-2);
+    var countdown = minutes + ':' + seconds;
+
+    document.getElementById('timespan').innerHTML = countdown;
 };
 
 function countdown() {
-    // starts countdown
     displayTimer();
     if (count == 0) {
         console.log('time is up')
@@ -95,6 +99,10 @@ function init() {
 
     setUpEventListeners();
 }
+
+
+
+
 
 
 function game() {
