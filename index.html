@@ -6,7 +6,7 @@
         <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet'>
         <title>Flags of the world</title>
     </head>
-    <body>
+    <body onload="timerReset()">
         <div class="background"> 
             <div class="container">
                 <h1 class="heading">
@@ -18,8 +18,18 @@
                 <div class="text__box">
                     <input type="text" class="enter__guess" >
                 </div>
+                <input class="start__button" type="button" value="Start" onclick="countdown()">
+                <div class="buttons">
+                    <input type="button" value="Skip" onclick="skip()">
+                    <input type="button" value="Stop" onclick="timerPause()">
+                    <input type="button" value="Reset" onclick="reset()">
+                </div>
+                
                 <div class="score">
                     0
+                </div>
+                <div class="timer" id="timespan">
+                    
                 </div>
             </div>
         </div>
