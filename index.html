@@ -21,11 +21,11 @@
                 <div class="text__box">
                     <input type="text" class="enter__guess" >
                 </div>
-                <input class="start__button" type="button" value="Start" onclick="countdown()">
+                <input class="start__button" type="button" value="Start" >
                 <div class="buttons">
-                    <input type="button" value="Skip" onclick="skip()">
-                    <input type="button" value="Pause" onclick="timerPause()">
-                    <input type="button" value="Reset" onclick="reset()">
+                    <input type="button" id="skip" value="Skip">
+                    <input type="button" id="pause" value="Pause">
+                    <input type="button" id="reset" value="Reset" onclick="controller.init()">
                 </div>
                 
                 <div class="score">
@@ -38,6 +38,6 @@
         </div>
         
         
-        <script src="app.js"></script>
+        <script src="app-mvc.js"></script>
     </body>
 </html>
