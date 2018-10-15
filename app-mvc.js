@@ -158,7 +158,7 @@ var controller = (function(gameCtrl, UICtrl) {
     function timerReset() {
         timerPause();
         num = 300;
-        displayTimer(num);
+        UICtrl.displayTimer(num);
     };
 
     function finishGame() {
@@ -172,6 +172,12 @@ var controller = (function(gameCtrl, UICtrl) {
         // console.log(qs.flagName);
         UICtrl.displayQuestion(qs.flagSrc);
         UICtrl.displayScore(gameCtrl.getScore());
+    }
+
+    function reset() {
+        timerReset();
+        UICtrl.hideQuestionDisplay();
+        UICtrl.showStartingGameScreen();
     }
 
     var setUpEventListeners = function() {
@@ -202,6 +208,7 @@ var controller = (function(gameCtrl, UICtrl) {
 
         document.getElementById('pause').addEventListener('click', timerPause);
         document.getElementById('skip').addEventListener('click', setUpNextQuestion);
+        document.getElementById('reset').addEventListener('click', reset);
     };
 
 
@@ -211,7 +218,6 @@ var controller = (function(gameCtrl, UICtrl) {
             UICtrl.hideQuestionDisplay();
             UICtrl.showStartingGameScreen();
             setUpEventListeners()
-            timerReset();
         }
     }
 })(gameController, UIController);
