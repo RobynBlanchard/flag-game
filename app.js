@@ -1,176 +1,225 @@
-flags = {
-    'afghanistan': 'Afghanistan.png',
-    'albania': 'Albania.png',
-    'algeria': 'Algeria.png',
-    'american samoa': 'American_Samoa.png',
-    'andorra': 'Andorra.png',
-    'angola': 'Angola.png',
-    'anguilla': 'Anguilla.png',
-    'antigua and barbuda': 'Antigua_and_Barbuda.png',
-    'argentina': 'Argentina.png',
-    'armenia': 'Armenia.png',
-    'aruba': 'Aruba.png',
-    'australia': 'Australia.png'
-}
+var gameController = (function() {
+    var gameData = {
+        flags: {
+            'afghanistan': 'Afghanistan.png',
+            'albania': 'Albania.png',
+            'algeria': 'Algeria.png',
+            'american samoa': 'American_Samoa.png',
+            'andorra': 'Andorra.png',
+            'angola': 'Angola.png',
+            'anguilla': 'Anguilla.png',
+            'antigua and barbuda': 'Antigua_and_Barbuda.png',
+            'argentina': 'Argentina.png',
+            'armenia': 'Armenia.png',
+            'aruba': 'Aruba.png',
+            'australia': 'Australia.png'
+        },
+        flagNames: [],
+        flagSrcs: [],
+        index: 0,
+        currentQuestion: {
+            flagName: 'not set',
+            flagSrc: 'not set '
+        },
+        score: 0
+    }
 
-var index, allCountries, allFlags, currentCountry, currentFlag;
+    var randomIndex = function(list) {
+        var len = list.length;
+        return Math.floor(Math.random() * len);
+    }
 
-var score;
-
-var CCOUNT = 300; // 5 minutes
-    
-var t, count;
-
-var setUpEventListeners = function() {
-    document.addEventListener("keypress", function() {
-        if (event.keyCode == 13 || event.which == 13) {
-            game();
+    return {
+        getCurrentQuestion: function() {
+            return gameData.currentQuestion;
+        },
+        setNextQuestion: function() {
+            var index = randomIndex(gameData.flagNames);
+            gameData.index = index;
+            gameData.currentQuestion.flagName = gameData.flagNames[index];
+            gameData.currentQuestion.flagSrc = gameData.flagSrcs[index];
+        },
+        setUpQuestions: function() {
+            gameData.flagNames = Object.keys(gameData.flags);
+            gameData.flagSrcs = Object.values(gameData.flags);
+        },
+        incrementScore: function() {
+            gameData.score++;
+        },
+        getScore: function() {
+            return gameData.score;
+        },
+        removeQuestion: function() {
+            gameData.flagNames.splice(gameData.index,1);
+            gameData.flagSrcs.splice(gameData.index, 1);
+        },
+        numQuestionsRemaining: function() {
+            return gameData.flagNames.length;
         }
-    });
-    document.querySelector('.start__button').addEventListener('click', function () {
-        setUp();
-    
-        setGameDisplay();
-        
-    });
-};
-
-function setGameDisplay() {
-    document.querySelector('.text__box').style.display = 'block';
-    document.querySelector('.timer').style.display = 'block';
-    document.querySelector('.start__button').style.display = 'none';
-    document.querySelector('.winner').style.display = 'none';
-    document.querySelector('.flag__outline').style.display = 'block';
-    document.querySelector('.enter__guess').focus();
-    document.querySelector('.buttons').style.display = 'block';
-    document.querySelector('.score').style.display = 'block';
-    
-    score = 0;
-    document.querySelector('.score').textContent = score;
-    focusInputTextBox()
-}
-
-function setUp() {
-    allCountries = Object.keys(flags);
-    allFlags = Object.values(flags);
-    nextQuestion();
-}
-
-function reset() {
-    timerReset();
-    init();
-}
-
-function skip() {
-    nextQuestion() // prevent next question from being same flag
-    focusInputTextBox()
-
-}
-
-function displayTimer() {
-    var minutes = Math.floor(count / 60);
-    var seconds = count % 60;
-    
-    minutes = String("0" + minutes).slice(-2);
-    seconds = String("0" + seconds).slice(-2);
-    
-    var countdown = minutes + ':' + seconds;
-
-    document.getElementById('timespan').innerHTML = countdown;
-};
-
-function countdown() {
-    displayTimer();
-    if (count == 0) {
-        console.log('time is up')
-        // TODO
-    } else {
-        count--;
-        t = setTimeout("countdown()", 1000);
     }
-};
 
-function timerPause() {
-    clearTimeout(t);
-};
+})();
 
-function timerReset() {
-    timerPause();
-    count = CCOUNT;
-    displayTimer();
-};
+var UIController = (function() {
+    var DOMStrings = {
+        flag: '.flag__outline',
+        flagImage: '.flag__image',
+        inputBox: '.text__box',
+        timer: '.timer',
+        buttons: '.buttons',
+        startButton: '.start__button',
+        score: '.score',
+        winnerMessage: '.winner',
+        inputTextBox: '.enter__guess'
 
-
-function game() {
-    var correct = checkGuess();
-    if (correct) {
-        score++;
-        document.querySelector('.score').textContent = score;
-        if (allCountries.length === 1) {
-            console.log('winner');
-            finishGame();
-        } else {
-            focusInputTextBox()
-
-            removeCountry();
-            nextQuestion();
-
-        }   
     }
-};
 
-function finishGame() {
-    document.querySelector('.winner').style.display = 'block';
-    hideQuestionDisplay()
-    timerReset();
+    function focusInputTextBox() {
+        document.querySelector(DOMStrings.inputTextBox).value = "";
+        document.querySelector(DOMStrings.inputTextBox).focus();
+    }
 
-    document.querySelector('.start__button').value = 'new game';
-    document.querySelector('.start__button').style.display = 'block';
-}
+    return {
+        hideQuestionDisplay: function() {
+            document.querySelector(DOMStrings.flag).style.display = 'none';
+            document.querySelector(DOMStrings.inputBox).style.display = 'none';
+            document.querySelector(DOMStrings.timer).style.display = 'none';
+            document.querySelector(DOMStrings.buttons).style.display = 'none';
+        },
+        showStartingGameScreen: function() {
+            document.querySelector(DOMStrings.startButton).style.display = 'block';
+            document.querySelector(DOMStrings.startButton).value = 'Start';
+            document.querySelector(DOMStrings.score).style.display = 'none';
+            document.querySelector(DOMStrings.winnerMessage).style.display = 'none';
+        },
+        DOMStrings: DOMStrings,
+        displayQuestion: function(currentFlag) {
+            document.querySelector(DOMStrings.flagImage).src = 'assets/' + currentFlag;
+            focusInputTextBox();
+        },
+        setGameDisplay: function() {
+            document.querySelector(DOMStrings.inputBox).style.display = 'block';
+            document.querySelector(DOMStrings.timer).style.display = 'block';
+            document.querySelector(DOMStrings.startButton).style.display = 'none';
+            document.querySelector(DOMStrings.winnerMessage).style.display = 'none';
+            document.querySelector(DOMStrings.flag).style.display = 'block';
+            document.querySelector(DOMStrings.buttons).style.display = 'block';
+            document.querySelector(DOMStrings.score).style.display = 'block';
+        },
+        getAnswer: function() {
+           return document.querySelector(DOMStrings.inputTextBox).value.toLowerCase();
+        },
+        displayScore: function(score) {
+            console.log(score);
+            document.querySelector(DOMStrings.score).textContent = score;
+        },
+        displayWinner: function() {
+            document.querySelector(DOMStrings.winnerMessage).style.display = 'block';
+            this.hideQuestionDisplay();
+            document.querySelector(DOMStrings.startButton).value = 'new game';
+            document.querySelector(DOMStrings.startButton).style.display = 'block';
+        },
+        displayTimer: function(count) {
+            var minutes = Math.floor(count / 60);
+            var seconds = count % 60;
+            
+            minutes = String("0" + minutes).slice(-2);
+            seconds = String("0" + seconds).slice(-2);
+            
+            var countdown = minutes + ':' + seconds;
+            console.log('idsjfoisjdifjsoifj')
+            document.getElementById('timespan').innerHTML = countdown;
+        }
+    }
 
-function hideQuestionDisplay() {
-    document.querySelector('.flag__outline').style.display = 'none';
-    document.querySelector('.text__box').style.display = 'none';
-    document.querySelector('.timer').style.display = 'none';
-    document.querySelector('.buttons').style.display = 'none';
-}
+})();
 
-function nextQuestion(){
-    index  = randomIndex(allCountries);
-    currentCountry = allCountries[index];
-    currentFlag = allFlags[index];
-    document.querySelector('.flag__image').src = 'assets/' + currentFlag
-}
+var controller = (function(gameCtrl, UICtrl) {
+    var DOMStrings = UICtrl.DOMStrings
 
-function checkGuess() {
-    var ans = document.querySelector('.enter__guess').value.toLowerCase();
-    return ans === currentCountry ?  true :  false;
-}
+    var num = 300;
+    var t, count;
+    var counter;
 
-function focusInputTextBox() {
-    document.querySelector('.enter__guess').value = "";
-    document.querySelector('.enter__guess').focus();
-}
 
-function removeCountry() {
-    allCountries.splice(index,1);
-    allFlags.splice(index, 1);
-}
 
-function randomIndex(list) {
-    var len = list.length;
-    return Math.floor(Math.random() * len);
-}
+    function setTimer() {
+        console.log(num);
+        num--;
+        UICtrl.displayTimer(num);
+        counter = setTimeout(setTimer, 1000);
+    };
 
-function init() {
-    hideQuestionDisplay()
     
-    document.querySelector('.start__button').style.display = 'block';
-    document.querySelector('.start__button').value = 'Start';
-    document.querySelector('.score').style.display = 'none';
-    document.querySelector('.winner').style.display = 'none';
+    function timerPause() {
+        clearTimeout(counter);
+    }
     
-    setUpEventListeners();
-}
+    function timerReset() {
+        timerPause();
+        num = 300;
+        UICtrl.displayTimer(num);
+    };
 
-init();
+    function finishGame() {
+        UICtrl.displayWinner();
+        timerReset();
+    }
+
+    function setUpNextQuestion() {
+        gameCtrl.setNextQuestion();
+        var qs = gameCtrl.getCurrentQuestion();
+        // console.log(qs.flagName);
+        UICtrl.displayQuestion(qs.flagSrc);
+        UICtrl.displayScore(gameCtrl.getScore());
+    }
+
+    function reset() {
+        timerReset();
+        UICtrl.hideQuestionDisplay();
+        UICtrl.showStartingGameScreen();
+    }
+
+    var setUpEventListeners = function() {
+        document.addEventListener("keypress", function() {
+            if (event.keyCode == 13 || event.which == 13) {
+                var ans = UICtrl.getAnswer();
+                if (ans === gameCtrl.getCurrentQuestion().flagName) {
+                    gameCtrl.incrementScore();
+                    var score = gameCtrl.getScore();
+                    if (gameCtrl.numQuestionsRemaining() === 1) {
+                        console.log('winner');
+                        finishGame();
+                    }
+                    
+                    gameCtrl.removeQuestion();
+                    setUpNextQuestion();
+                }
+
+            }
+        });
+
+        document.querySelector(DOMStrings.startButton).addEventListener('click', function () {
+            setTimer();
+            gameCtrl.setUpQuestions();
+            UICtrl.setGameDisplay();
+            setUpNextQuestion()
+        });
+
+        document.getElementById('pause').addEventListener('click', timerPause);
+        document.getElementById('skip').addEventListener('click', setUpNextQuestion);
+        document.getElementById('reset').addEventListener('click', reset);
+    };
+
+
+
+    return {
+        init: function() {
+            UICtrl.hideQuestionDisplay();
+            UICtrl.showStartingGameScreen();
+            setUpEventListeners()
+        }
+    }
+})(gameController, UIController);
+
+controller.init();
