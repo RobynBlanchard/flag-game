@@ -1,18 +1,18 @@
 var gameController = (function() {
     var gameData = {
         flags: {
-            'afghanistan': 'Afghanistan.png',
-            'albania': 'Albania.png',
-            'algeria': 'Algeria.png',
-            'american samoa': 'American_Samoa.png',
-            'andorra': 'Andorra.png',
-            'angola': 'Angola.png',
-            'anguilla': 'Anguilla.png',
-            'antigua and barbuda': 'Antigua_and_Barbuda.png',
-            'argentina': 'Argentina.png',
-            'armenia': 'Armenia.png',
+            // 'afghanistan': 'Afghanistan.png',
+            // 'albania': 'Albania.png',
+            // 'algeria': 'Algeria.png',
+            // 'american samoa': 'American_Samoa.png',
+            // 'andorra': 'Andorra.png',
+            // 'angola': 'Angola.png',
+            // 'anguilla': 'Anguilla.png',
+            // 'antigua and barbuda': 'Antigua_and_Barbuda.png',
+            // 'argentina': 'Argentina.png',
+            // 'armenia': 'Armenia.png',
             'aruba': 'Aruba.png',
-            'australia': 'Australia.png'
+            // 'australia': 'Australia.png'
         },
         flagNames: [],
         flagSrcs: [],
@@ -70,7 +70,8 @@ var UIController = (function() {
         startButton: '.start__button',
         score: '.score',
         winnerMessage: '.winner',
-        inputTextBox: '.enter__guess'
+        inputTextBox: '.enter__guess',
+        questionDisplayWrapper: '.question__wrapper'
 
     }
 
@@ -81,10 +82,7 @@ var UIController = (function() {
 
     return {
         hideQuestionDisplay: function() {
-            document.querySelector(DOMStrings.flag).style.display = 'none';
-            document.querySelector(DOMStrings.inputBox).style.display = 'none';
-            document.querySelector(DOMStrings.timer).style.display = 'none';
-            document.querySelector(DOMStrings.buttons).style.display = 'none';
+            document.querySelector(DOMStrings.questionDisplayWrapper).style.display = 'none';
         },
         showStartingGameScreen: function() {
             document.querySelector(DOMStrings.startButton).style.display = 'block';
@@ -98,34 +96,32 @@ var UIController = (function() {
             focusInputTextBox();
         },
         setGameDisplay: function() {
-            document.querySelector(DOMStrings.inputBox).style.display = 'block';
-            document.querySelector(DOMStrings.timer).style.display = 'block';
+            document.querySelector(DOMStrings.questionDisplayWrapper).style.display = 'block';
             document.querySelector(DOMStrings.startButton).style.display = 'none';
             document.querySelector(DOMStrings.winnerMessage).style.display = 'none';
-            document.querySelector(DOMStrings.flag).style.display = 'block';
-            document.querySelector(DOMStrings.buttons).style.display = 'block';
             document.querySelector(DOMStrings.score).style.display = 'block';
         },
         getAnswer: function() {
            return document.querySelector(DOMStrings.inputTextBox).value.toLowerCase();
         },
         displayScore: function(score) {
-            console.log(score);
             document.querySelector(DOMStrings.score).textContent = score;
         },
         displayWinner: function() {
             document.querySelector(DOMStrings.winnerMessage).style.display = 'block';
+            document.querySelector(DOMStrings.timer).style.display = 'block';
             this.hideQuestionDisplay();
+
             document.querySelector(DOMStrings.startButton).value = 'new game';
             document.querySelector(DOMStrings.startButton).style.display = 'block';
         },
         displayTimer: function(count) {
             var minutes = Math.floor(count / 60);
             var seconds = count % 60;
-            
+
             minutes = String("0" + minutes).slice(-2);
             seconds = String("0" + seconds).slice(-2);
-            
+
             var countdown = minutes + ':' + seconds;
             console.log('idsjfoisjdifjsoifj')
             document.getElementById('timespan').innerHTML = countdown;
@@ -150,11 +146,11 @@ var controller = (function(gameCtrl, UICtrl) {
         counter = setTimeout(setTimer, 1000);
     };
 
-    
+
     function timerPause() {
         clearTimeout(counter);
     }
-    
+
     function timerReset() {
         timerPause();
         num = 300;
@@ -191,7 +187,7 @@ var controller = (function(gameCtrl, UICtrl) {
                         console.log('winner');
                         finishGame();
                     }
-                    
+
                     gameCtrl.removeQuestion();
                     setUpNextQuestion();
                 }
