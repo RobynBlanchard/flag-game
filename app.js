@@ -1,18 +1,18 @@
 var gameController = (function() {
   var gameData = {
     flags: {
-      // 'afghanistan': 'Afghanistan.png',
-      // 'albania': 'Albania.png',
-      // 'algeria': 'Algeria.png',
-      // 'american samoa': 'American_Samoa.png',
-      // 'andorra': 'Andorra.png',
-      // 'angola': 'Angola.png',
-      // 'anguilla': 'Anguilla.png',
-      // 'antigua and barbuda': 'Antigua_and_Barbuda.png',
-      // 'argentina': 'Argentina.png',
-      // 'armenia': 'Armenia.png',
-      aruba: 'Aruba.png'
-      // 'australia': 'Australia.png'
+      'afghanistan': 'Afghanistan.png',
+      'albania': 'Albania.png',
+      'algeria': 'Algeria.png',
+      'american samoa': 'American_Samoa.png',
+      'andorra': 'Andorra.png',
+      'angola': 'Angola.png',
+      'anguilla': 'Anguilla.png',
+      'antigua and barbuda': 'Antigua_and_Barbuda.png',
+      'argentina': 'Argentina.png',
+      'armenia': 'Armenia.png',
+      'aruba': 'Aruba.png',
+      'australia': 'Australia.png'
     },
     flagNames: [],
     flagSrcs: [],
@@ -48,6 +48,9 @@ var gameController = (function() {
     },
     getScore: function() {
       return gameData.score;
+    },
+    getTotalNumQuestions: function() {
+        return Object.keys(gameData.flags).length;
     },
     removeQuestion: function() {
       gameData.flagNames.splice(gameData.index, 1);
@@ -114,8 +117,8 @@ var UIController = (function() {
         .querySelector(DOMStrings.inputTextBox)
         .value.toLowerCase();
     },
-    displayScore: function(score) {
-      document.querySelector(DOMStrings.score).textContent = score;
+    displayScore: function(score, totalNumOfQuestions) {
+      document.querySelector(DOMStrings.score).textContent = score + '/' + totalNumOfQuestions;
     },
     displayEndOfGame: function(playDidWin) {
       var text = playDidWin ? 'winner' : 'loser - out of time';
@@ -210,7 +213,7 @@ var controller = (function(gameCtrl, UICtrl) {
     gameCtrl.setNextQuestion();
     var qs = gameCtrl.getCurrentQuestion();
     UICtrl.displayQuestion(qs.flagSrc);
-    UICtrl.displayScore(gameCtrl.getScore());
+    UICtrl.displayScore(gameCtrl.getScore(), gameCtrl.getTotalNumQuestions());
   }
 
   function reset() {
