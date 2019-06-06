@@ -18,8 +18,8 @@ var gameController = (function() {
     flagSrcs: [],
     index: 0,
     currentQuestion: {
-      flagName: 'not set',
-      flagSrc: 'not set '
+      flagName: '',
+      flagSrc: ' '
     },
     score: 0
   };
