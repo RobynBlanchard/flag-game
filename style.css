@@ -1,111 +1,105 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Aldrich';
+    font-size: 24px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center ;
     align-items: center;
     height: 100%;
-    border: 1px solid black;
-    font-family: 'Aldrich';
+}
+.background {
+    background-image: url("assets/background/10.png");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+};
+
+.top__content {
+    width: 500px;
+}
+
+.heading__primary {
+    height: 50px;
+    text-align: center;
+    font-weight: 800;
+    display: inline-block;
+    font-size: 64px;
+}
+
+.bottom__content {
+    width: 500px;
+}
+
+.start__button__wrapper {
+    display: flex;
+    justify-content: center;
 }
 
 .flag__outline {
-    width: 400px;
-    height: 235px;
-    margin: 5px;
-    text-align: center;
-    margin-top: 20px;
-    border: 1px solid black;
+    margin-top: 16px;
 }
 
 .text__box {
-    width: 400px;
-    margin: 5px;
     text-align: center;
     height: 40px;
-    /* border: 1px solid red; */
+    border: 2px solid black;
 }
 
 .flag__image {
     width: 100%;
-    height: 100%;
+    height: 240px;
 }
 
-.enter__guess {
+.text__box__input {
     width: 100%;
     height: 100%;
+    font-size: 24px;
+    box-sizing:border-box;
+    font-family: inherit;
+    padding: 0 8px;
 }
 
-input[type="text"]
-{
-    font-size:24px;
-    color: black;
-}
-
-h1 {
-    font-size: 3em;
-    /* border: 1px solid red; */
-    height: 50px;
-    width: 400px;
-    text-align: center;  
-}
-
-body, html {
-    height: 100%;
-}
-
-.background { 
-    /* The image used */
-    background-image: url("assets/background/10.png");
-
-    /* Full height */
-    height: 100%; 
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.score {
-    width: 400px;
-    font-size: 50px;
-    margin-top: 80px;
+.game__stats__wrapper {
     text-align: center;
-    /* border: 1px solid green; */
 }
 
-.timer {
-    width: 400px;
-    font-size: 40px;
-    /* height: 200px; */
+.timer, .score {
+    width: 100%;
     margin-top: 40px;
     text-align: center;
-    /* border: 1px solid red; */
+    font-size: 44px;
 }
 
+.buttons {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
 
 input[type="button"]:hover {
     background-color: #555555;
     color: white;
 }
 
-
-.buttons {
-    margin-top: 10px;
-}
-
 input[type="button"]
 {
-    padding: 16px 32px;
+    font-family: inherit;
     text-align: center;
     display: inline-block;
-    font-size: 20px;
-    margin: 4px 2px;
+    font-size: 28px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
     background-color: white;
     color: black;
     border: 2px solid #555555;
+    width: 30%;
+    padding: 24px 8px 16px;
+    height: 80px;
 }
 

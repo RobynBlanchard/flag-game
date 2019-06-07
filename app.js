@@ -72,7 +72,7 @@ var UIController = (function() {
     startButton: '.start__button',
     score: '.score',
     endMessage: '.end__message',
-    inputTextBox: '.enter__guess',
+    inputTextBox: '.text__box__input',
     questionDisplayWrapper: '.question__wrapper',
     pauseButton: '#pause',
     resumeButton: '#resume',
@@ -109,6 +109,7 @@ var UIController = (function() {
       document.querySelector(DOMStrings.gameStatsWrapper).style.display =
         'block';
       document.querySelector(DOMStrings.resumeButton).style.display = 'none';
+      document.querySelector(DOMStrings.pauseButton).style.display = 'block';
       document.querySelector(DOMStrings.startButton).style.display = 'none';
       document.querySelector(DOMStrings.endMessage).style.display = 'none';
     },
@@ -154,7 +155,7 @@ var controller = (function(gameCtrl, UICtrl) {
   var DOMStrings = UICtrl.DOMStrings;
 
   function Timer() {
-    var num = 10;
+    var num = 300;
     var counter;
     var paused = false;
 
