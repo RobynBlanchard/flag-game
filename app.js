@@ -110,6 +110,7 @@ var UIController = (function() {
     startButton: '.start__button',
     score: '.score',
     endMessage: '.end__message',
+    secondaryHeading: '.heading__secondary',
     inputTextBox: '.text__box__input',
     questionDisplayWrapper: '.question__wrapper',
     pauseButton: '#pause',
@@ -162,7 +163,7 @@ var UIController = (function() {
     },
     displayEndOfGame: function(playDidWin) {
       var text = playDidWin ? 'winner' : 'loser - out of time';
-      document.querySelector(DOMStrings.endMessage).innerText = text;
+      document.querySelector(DOMStrings.secondaryHeading).innerText = text;
       document.querySelector(DOMStrings.endMessage).style.display = 'block';
       document.querySelector(DOMStrings.questionDisplayWrapper).style.display =
         'none';

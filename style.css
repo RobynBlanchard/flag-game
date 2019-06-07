@@ -35,10 +35,20 @@ body, html {
     width: 500px;
 }
 
+.end__message {
+    text-align: center;
+}
+
+.heading__secondary {
+    font-size: 44px;
+}
+
 .start__button__wrapper {
     display: flex;
     justify-content: center;
 }
+
+
 
 .flag__outline {
     margin-top: 16px;
@@ -103,7 +113,7 @@ input[type="button"]
     font-family: inherit;
     text-align: center;
     display: inline-block;
-    font-size: 28px;
+    font-size: 24px;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     cursor: pointer;
