@@ -1,6 +1,7 @@
 var gameController = (function() {
   var gameData = {
     flags: {
+      'afghanistan':'afghanistan.png',
       'albania':'albania.png',
       'algeria':'algeria.png',
       'andorra':'andorra.png',
@@ -285,7 +286,9 @@ var UIController = (function() {
     },
     displayQuestion: function(currentFlag) {
       document.querySelector(DOMStrings.flagImage).src =
-        'images/flags/' + currentFlag;
+        'images/flags/' + currentFlag.flagSrc;
+      document.querySelector(DOMStrings.flagImage).alt =
+        currentFlag.flagName + ' flag';
       focusInputTextBox();
     },
     setGameDisplay: function() {
@@ -344,7 +347,7 @@ var controller = (function(gameCtrl, UICtrl) {
   var DOMStrings = UICtrl.DOMStrings;
 
   function Timer() {
-    var num = 300;
+    var num = 600;
     var counter;
     var paused = false;
 
@@ -403,7 +406,7 @@ var controller = (function(gameCtrl, UICtrl) {
   function setUpNextQuestion() {
     gameCtrl.setNextQuestion();
     var qs = gameCtrl.getCurrentQuestion();
-    UICtrl.displayQuestion(qs.flagSrc);
+    UICtrl.displayQuestion(qs);
     UICtrl.displayScore(gameCtrl.getScore(), gameCtrl.getTotalNumQuestions());
   }
 
