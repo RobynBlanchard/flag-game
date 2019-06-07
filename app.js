@@ -76,6 +76,7 @@ var UIController = (function() {
     questionDisplayWrapper: '.question__wrapper',
     pauseButton: '#pause',
     resumeButton: '#resume',
+    skipButton: '#skip',
     gameStatsWrapper: '.game__stats__wrapper'
   };
 
@@ -141,10 +142,14 @@ var UIController = (function() {
       document.getElementById('timespan').innerHTML = countdown;
     },
     pauseGame: function() {
+      document.querySelector(DOMStrings.inputTextBox).disabled = true;
+      document.querySelector(DOMStrings.skipButton).disabled = true;
       document.querySelector(DOMStrings.pauseButton).style.display = 'none';
       document.querySelector(DOMStrings.resumeButton).style.display = 'block';
     },
     resumeGame: function() {
+      document.querySelector(DOMStrings.inputTextBox).disabled = false;
+      document.querySelector(DOMStrings.skipButton).disabled = false;
       document.querySelector(DOMStrings.pauseButton).style.display = 'block';
       document.querySelector(DOMStrings.resumeButton).style.display = 'none';
     }
@@ -199,6 +204,7 @@ var controller = (function(gameCtrl, UICtrl) {
   function handleResume() {
     timertwo.resume();
     UICtrl.resumeGame();
+
   }
 
   function timerReset() {
