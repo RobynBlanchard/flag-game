@@ -184,3 +184,9 @@ input[type="button"]
         font-size: 1.6rem;}
     }
 }
+
+.flag__image__credit {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+}
