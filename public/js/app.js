@@ -41,7 +41,7 @@ var gameController = (function() {
       'comoros':'comoros.png',
       'congo':'congo.png',
       'costa rica':'costa_rica.png',
-      'côte_d\'Ivoire':'côte_d\'Ivoire.png',
+      'côte d\'Ivoire':'côte_d\'Ivoire.png',
       'croatia':'croatia.png',
       'cuba':'cuba.png',
       'cyprus':'cyprus.png',
