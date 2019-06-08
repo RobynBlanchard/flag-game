@@ -66,6 +66,7 @@ body {
 
 .flag__outline {
     /* margin-top: 16px; */
+    margin-top: 1.5rem;
 }
 
 .text__box {
@@ -154,7 +155,8 @@ input[type="button"]
     width: 30%;
     padding: 24px 8px 16px;
     /* height: 80px; */
-    height: 16%;
+    /* height: 16%; */
+    height: 6rem;
 }
 
 

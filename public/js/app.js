@@ -267,7 +267,19 @@ var UIController = (function() {
 
   function focusInputTextBox() {
     document.querySelector(DOMStrings.inputTextBox).value = '';
-    document.querySelector(DOMStrings.inputTextBox).focus();
+    // document.querySelector(DOMStrings.inputTextBox).focus();
+
+    // var cursorFocus = function(elem) {
+    //   var x = window.scrollX, y = window.scrollY;
+    //   elem.focus();
+    //   window.scrollTo(x, y);
+    // }
+
+    document.querySelector(DOMStrings.inputTextBox).focus({
+      preventScroll: true
+    });
+
+    // cursorFocus(document.querySelector(DOMStrings.inputTextBox));
   }
 
   return {
@@ -441,6 +453,12 @@ var controller = (function(gameCtrl, UICtrl) {
         UICtrl.setGameDisplay();
         setUpNextQuestion();
       });
+
+      // var element = document.querySelector('.text__box__input')
+      // element.focus({
+      //   preventScroll: true
+      // });
+
 
     document.getElementById('pause').addEventListener('click', handlePause);
     document.getElementById('resume').addEventListener('click', handleResume);
