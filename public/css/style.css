@@ -138,6 +138,8 @@ input[type="button"]:disabled {
 
 input[type="button"]
 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
     font-family: inherit;
     text-align: center;
     display: inline-block;
