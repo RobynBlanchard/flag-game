@@ -294,8 +294,6 @@ var UIController = (function() {
     displayQuestion: function(currentFlag) {
       document.querySelector(DOMStrings.flagImage).src =
         'images/flags/' + currentFlag.flagSrc;
-      document.querySelector(DOMStrings.flagImage).alt =
-        currentFlag.flagName + ' flag';
       focusInputTextBox();
     },
     setGameDisplay: function() {
@@ -430,7 +428,6 @@ var controller = (function(gameCtrl, UICtrl) {
           gameCtrl.incrementScore();
           var score = gameCtrl.getScore();
           if (gameCtrl.numQuestionsRemaining() === 1) {
-            console.log('winner');
             finishGame(true);
           }
 
@@ -448,12 +445,6 @@ var controller = (function(gameCtrl, UICtrl) {
         UICtrl.setGameDisplay();
         setUpNextQuestion();
       });
-
-      // var element = document.querySelector('.text__box__input')
-      // element.focus({
-      //   preventScroll: true
-      // });
-
 
     document.getElementById('pause').addEventListener('click', handlePause);
     document.getElementById('resume').addEventListener('click', handleResume);
