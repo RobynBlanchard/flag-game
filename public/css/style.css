@@ -5,22 +5,24 @@ body, html {
     font-size: 24px;
 }
 
+body {
+  background-image: url("/images/background/10.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #464646;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100%;
 }
-.background {
-    background-image: url("/images/background/10.png");
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-};
 
 .top__content {
-    width: 500px;
+    width: 26%
 }
 
 .heading__primary {
@@ -32,7 +34,13 @@ body, html {
 }
 
 .bottom__content {
-    width: 500px;
+    width: 26%
+}
+
+@media only screen and (max-width: 600px) {
+  .top__content, .bottom__content {
+    width: 80%;
+  }
 }
 
 .end__message {
@@ -46,6 +54,7 @@ body, html {
 .start__button__wrapper {
     display: flex;
     justify-content: center;
+    margin-top: 50px;
 }
 
 
