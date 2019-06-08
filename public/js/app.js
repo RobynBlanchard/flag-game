@@ -267,19 +267,14 @@ var UIController = (function() {
 
   function focusInputTextBox() {
     document.querySelector(DOMStrings.inputTextBox).value = '';
-    // document.querySelector(DOMStrings.inputTextBox).focus();
 
-    // var cursorFocus = function(elem) {
-    //   var x = window.scrollX, y = window.scrollY;
-    //   elem.focus();
-    //   window.scrollTo(x, y);
-    // }
+    var cursorFocus = function(elem) {
+      var x = window.scrollX, y = window.scrollY;
+      elem.focus();
+      window.scrollTo(x, y);
+    }
 
-    document.querySelector(DOMStrings.inputTextBox).focus({
-      preventScroll: true
-    });
-
-    // cursorFocus(document.querySelector(DOMStrings.inputTextBox));
+    cursorFocus(document.querySelector(DOMStrings.inputTextBox));
   }
 
   return {
