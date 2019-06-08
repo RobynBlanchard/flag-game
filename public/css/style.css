@@ -80,7 +80,10 @@ body {
     /* width: 100%; */
     /* height: 240px; */
     /* height: 24%; */
-    height: 20rem;
+    /* height: 20rem;
+    width: 100rem; */
+    height: 16rem;
+    width: 30rem;
 }
 
 .text__box__input {
