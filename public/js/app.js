@@ -1006,19 +1006,16 @@ var controller = (function(gameCtrl, UICtrl) {
   }
 
   var setUpEventListeners = function() {
-    document.addEventListener('keypress', function() {
-      if (event.keyCode == 13 || event.which == 13) {
-        var ans = UICtrl.getAnswer();
-        if (gameCtrl.getCurrentQuestion().answers.indexOf(ans) === 0) {
-          gameCtrl.incrementScore();
-          var score = gameCtrl.getScore();
-          if (gameCtrl.numQuestionsRemaining() === 1) {
-            finishGame(true);
-          }
-
-          gameCtrl.removeQuestion();
-          setUpNextQuestion();
+    document.addEventListener('input', function() {
+      var ans = UICtrl.getAnswer();
+      if (gameCtrl.getCurrentQuestion().answers.indexOf(ans) === 0) {
+        gameCtrl.incrementScore();
+        if (gameCtrl.numQuestionsRemaining() === 1) {
+          return finishGame(true);
         }
+
+        gameCtrl.removeQuestion();
+        setUpNextQuestion();
       }
     });
 
