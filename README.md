@@ -6,3 +6,4 @@ https://play-guess-the-flag.herokuapp.com
 <!-- mobile first -->
 <!-- tblet landscape repositioning -->
 <!-- keep ratio if images  - monaco nepal etc -->
+<!-- take answer on change -->
