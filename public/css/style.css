@@ -166,7 +166,7 @@ input[type="button"]
 
     .flag__image {
     height: 16rem;
-    width: 30rem;
+    width: 100%;
     }
 
     .text__box {
