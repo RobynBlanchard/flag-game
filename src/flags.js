@@ -160,7 +160,7 @@ const flags = [
     answers: ['costa rica']
   },
   {
-    question: 'côte_d\'Ivoire.png',
+    question: 'ivory_coast.png',
     answers: ['côte d\'ivoire', 'cote d-ivoire', 'côte d-ivoire', 'cote d\'ivore', 'ivory coast']
   },
   {
