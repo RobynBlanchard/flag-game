@@ -161,7 +161,7 @@ const flags = [
   },
   {
     question: 'côte_d\'Ivoire.png',
-    answers: ['côte d\'ivoire', 'cote d-ivoire', 'côte d-ivoire', 'cote d\'ivore']
+    answers: ['côte d\'ivoire', 'cote d-ivoire', 'côte d-ivoire', 'cote d\'ivore', 'ivory coast']
   },
   {
     question: 'croatia.png',

@@ -9,6 +9,8 @@ var gameController = (function() {
     score: 0
   };
 
+  // TODO: skip - don't skip if already skipped
+
   var randomIndex = function(list) {
     var len = list.length;
     return Math.floor(Math.random() * len);
@@ -25,10 +27,13 @@ var gameController = (function() {
     setNextQuestion: function() {
       var index = randomIndex(gameData.flagsCopy);
       gameData.index = index;
-      gameData.currentQuestion = gameData.flags[index];
+      gameData.currentQuestion = gameData.flagsCopy[index];
     },
     setUpQuestions: function() {
       gameData.flagsCopy = nestedCopy(gameData.flags);
+    },
+    resetScore: function() {
+      gameData.score = 0;
     },
     incrementScore: function() {
       gameData.score++;
@@ -92,6 +97,9 @@ var UIController = (function() {
         'none';
       document.querySelector(DOMStrings.questionDisplayWrapper).style.display =
         'none';
+      document.querySelector(DOMStrings.inputTextBox).disabled = false;
+      document.querySelector(DOMStrings.skipButton).disabled = false;
+
     },
     displayQuestion: function(currentFlag) {
       document.querySelector(DOMStrings.flagImage).src =
@@ -206,6 +214,7 @@ var controller = (function(gameCtrl, UICtrl) {
   }
 
   function finishGame(playerDidWin) {
+    UICtrl.displayScore(gameCtrl.getScore(), gameCtrl.getTotalNumQuestions());
     UICtrl.displayEndOfGame(playerDidWin);
     timertwo.reset();
   }
@@ -219,13 +228,14 @@ var controller = (function(gameCtrl, UICtrl) {
 
   function reset() {
     timerReset();
+    // score reset
     UICtrl.showStartingGameScreen();
   }
 
   var setUpEventListeners = function() {
     document.addEventListener('input', function() {
       var ans = UICtrl.getAnswer();
-      if (gameCtrl.getCurrentQuestion().answers.indexOf(ans) === 0) {
+      if (gameCtrl.getCurrentQuestion().answers.indexOf(ans) !== -1) {
         gameCtrl.incrementScore();
         if (gameCtrl.numQuestionsRemaining() === 1) {
           return finishGame(true);
@@ -243,6 +253,7 @@ var controller = (function(gameCtrl, UICtrl) {
       .addEventListener('click', function() {
         setTimer();
         gameCtrl.setUpQuestions();
+        gameCtrl.resetScore();
         UICtrl.setGameDisplay();
         setUpNextQuestion();
       });
