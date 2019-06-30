@@ -4,7 +4,6 @@ var gameController = (function() {
   var gameData = {
     flags: flags,
     flagsCopy: [],
-    index: 0,
     currentQuestion: {},
     score: 0
   };
@@ -26,7 +25,6 @@ var gameController = (function() {
     },
     setNextQuestion: function() {
       var index = randomIndex(gameData.flagsCopy);
-      gameData.index = index;
       gameData.currentQuestion = gameData.flagsCopy[index];
     },
     setUpQuestions: function() {
@@ -45,7 +43,8 @@ var gameController = (function() {
       return gameData.flags.length;
     },
     removeQuestion: function() {
-      gameData.flagsCopy.splice(gameData.index, 1);
+      var curIndex = gameData.flagsCopy.indexOf(gameData.currentQuestion);
+      gameData.flagsCopy.splice(curIndex, 1);
     },
     numQuestionsRemaining: function() {
       return gameData.flagsCopy.length;
