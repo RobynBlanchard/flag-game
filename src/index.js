@@ -1,3 +1,4 @@
+import style from './main.css';
 import flags from './flags';
 
 var gameController = (function() {
@@ -17,7 +18,7 @@ var gameController = (function() {
 
   function nestedCopy(array) {
     return JSON.parse(JSON.stringify(array));
-}
+  }
 
   return {
     getCurrentQuestion: function() {
@@ -75,10 +76,11 @@ var UIController = (function() {
     document.querySelector(DOMStrings.inputTextBox).value = '';
 
     var cursorFocus = function(elem) {
-      var x = window.scrollX, y = window.scrollY;
+      var x = window.scrollX,
+        y = window.scrollY;
       elem.focus();
       window.scrollTo(x, y);
-    }
+    };
 
     cursorFocus(document.querySelector(DOMStrings.inputTextBox));
   }
@@ -98,7 +100,6 @@ var UIController = (function() {
         'none';
       document.querySelector(DOMStrings.inputTextBox).disabled = false;
       document.querySelector(DOMStrings.skipButton).disabled = false;
-
     },
     displayQuestion: function(currentFlag) {
       document.querySelector(DOMStrings.flagImage).src =
@@ -121,7 +122,8 @@ var UIController = (function() {
         .value.toLowerCase();
     },
     displayScore: function(score, totalNumOfQuestions) {
-      document.querySelector(DOMStrings.score).textContent = score + '/' + totalNumOfQuestions;
+      document.querySelector(DOMStrings.score).textContent =
+        score + '/' + totalNumOfQuestions;
     },
     displayEndOfGame: function(playDidWin) {
       var text = playDidWin ? 'winner' : 'loser - out of time';
@@ -205,7 +207,6 @@ var controller = (function(gameCtrl, UICtrl) {
   function handleResume() {
     timertwo.resume();
     UICtrl.resumeGame();
-
   }
 
   function timerReset() {
